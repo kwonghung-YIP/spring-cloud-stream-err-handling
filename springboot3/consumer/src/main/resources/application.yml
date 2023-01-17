@@ -1,0 +1,48 @@
+spring:
+  cloud:
+    function:
+      definition: consume
+      bindings:
+        # Descriptive Binding Names
+        consume-in-0: my-consumer
+    stream:
+      bindings:
+        # Reference (Spring Cloud Stream - Common Binding Properties)
+        # https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/spring-cloud-stream.html#_common_binding_properties
+        my-consumer:
+          destination: counter
+          group: poc-group
+          #error-handler-definition: myErrorHandler
+          # Reference (Sping Cloud Stream - Consumer Properties)
+          # https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/spring-cloud-stream.html#_consumer_properties
+          consumer:
+            default-retryable: true
+            max-attempts: 4
+
+      kafka:
+        # Reference (Kafka Binder Properties)
+        # https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/spring-cloud-stream-binder-kafka.html#kafka-binder-properties
+        #binder:
+          #consumer-properties:
+          #configuration:
+            #commit-log-level: debug
+
+        bindings:
+          # Reference (Kafka Consumer Properties)
+          # https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/spring-cloud-stream-binder-kafka.html#kafka-consumer-properties
+          my-consumer:
+            enable-dlq: true
+            dlq-name: counter-dlq
+            configuration:
+              commit-log-level: debug
+
+logging:
+  level:
+    org.springframework.kafka: debug
+    org.springframework.messaging: debug
+
+
+
+
+
+

@@ -1,0 +1,6 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        deadletter-in-0:
+          destination: counter-dlq

@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        counter-out-0:
+          destination: counter
+
