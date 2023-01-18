@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    function:
+      definition: boardcastFn
+      bindings:
+        boardcastFn-in-0: input
+        boardcastFn-out-0: boardcast-out-0
+        boardcastFn-out-1: boardcast-out-1
+    stream:
+      bindings:
+        simple-in-0:
+          destination: counter
+        simple-out-0:
+          destination: counter2
+        boardcastFn-in-0:
+          destination: counter

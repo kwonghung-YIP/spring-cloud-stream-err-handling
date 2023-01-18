@@ -8,6 +8,7 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.util.StringUtils;
+import reactor.core.publisher.Flux;
 
 import java.nio.charset.StandardCharsets;
 import java.util.function.Consumer;
@@ -25,9 +26,9 @@ public class DlqConsumerApplication {
         return (msg) -> {
             MessageHeaders headers = msg.getHeaders();
             String dlqTopic = headers.get(KafkaHeaders.RECEIVED_TOPIC,String.class);
-            String origTopic = new String(headers.get("x-original-topic",byte[].class), StandardCharsets.UTF_8);
-            String exceptClass = new String(headers.get("x-exception-fqcn",byte[].class), StandardCharsets.UTF_8);
-            String exceptMsg = new String(headers.get("x-exception-message",byte[].class), StandardCharsets.UTF_8);
+            //String origTopic = new String(headers.get("x-original-topic",byte[].class), StandardCharsets.UTF_8);
+            //String exceptClass = new String(headers.get("x-exception-fqcn",byte[].class), StandardCharsets.UTF_8);
+            //String exceptMsg = new String(headers.get("x-exception-message",byte[].class), StandardCharsets.UTF_8);
             log.info("Received counter [{}] from topic [{}]",msg.getPayload(),dlqTopic);
         };
     }

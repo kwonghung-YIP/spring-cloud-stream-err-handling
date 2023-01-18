@@ -3,4 +3,4 @@ spring:
     stream:
       bindings:
         deadletter-in-0:
-          destination: counter-dlq
+          destination: counter2 #counter-dlq
